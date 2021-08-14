@@ -5,7 +5,19 @@ spring:
       - id : order-service
         uri: lb://ORDER-SERVICE 
         predicates:        - Path=/orders/**
+        filters:
+        - name: CircuitBreaker        - args:            name: order-servise
+            fallbackuri: forward:/orderServiceCallback
       - id : payment-service
         uri: lb://PAYMENT-SERVICE 
         predicates:
         - Path=/payments/**
+        filters:
+        - name: CircuitBreaker
+        - args:
+            name: payment-servise
+            fallbackuri: forward:/paymentServiceCallback
+            
+            
+management:  endpoints:    web:      exposure:        include: hystrix.stream        
+hystrix:  metrics:    polling-interval-ms: 5000  
