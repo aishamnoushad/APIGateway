@@ -21,3 +21,7 @@ spring:
             
 management:  endpoints:    web:      exposure:        include: hystrix.stream        
 hystrix:  metrics:    polling-interval-ms: 5000  
+    
+    
+    
+    
